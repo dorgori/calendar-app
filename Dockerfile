@@ -2,14 +2,14 @@ FROM node:lts-alpine
 
 # ENV NODE_ENV=production
 
-WORKDIR /app
+WORKDIR /calendar-fe
 
 COPY package.json .
 
 # RUN npm install --production --silent && mv node_modules ../
 RUN npm install
 
-RUN cd /app
+RUN cd /EVENT-SYSTEM-FE
 
 COPY . .
 
