@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps: 
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
         name: Build the docker image
       - working-directory: calendar-fe
         run: docker build . --file Dockerfile --tag calendar-fe:$(date +$s)
