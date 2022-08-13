@@ -1,82 +1,101 @@
-import React from "react";
-import PropTypes from "prop-types";
-import clsx from "clsx";
-import { Navigate as navigate } from "../../../src";
+import Toolbar from "react-big-calendar/lib/Toolbar";
+// design custom design or elements for top navigation toolbaar, for today, next, prev or all views
+export const CustomToolbar = ({ handleChange }) => {
+  return class BaseToolBar extends Toolbar {
+    constructor(props) {
+      super(props);
+    }
+    // handleDayChange = (event, mconte) => {
+    //   mconte(event.target.value);
+    // };
+    handleDayChange = (value, mconte) => {
+      mconte(value);
+    };
+    handleNamvigate = (detail, elem) => {
+      detail.navigate(elem);
+    };
 
-function ViewNamesGroup({ views: viewNames, view, messages, onView }) {
-  return viewNames.map((name) => (
-    <button
-      type="button"
-      key={name}
-      className={clsx({ "rbc-active": view === name })}
-      onClick={() => onView(name)}
-    >
-      {messages[name]}
-    </button>
-  ));
-}
-ViewNamesGroup.propTypes = {
-  messages: PropTypes.object,
-  onView: PropTypes.func,
-  view: PropTypes.string,
-  views: PropTypes.array,
-};
-
-export default function CustomToolbar({
-  // date, // available, but not used here
-  label,
-  localizer: { messages },
-  onNavigate,
-  onView,
-  view,
-  views,
-}) {
-  return (
-    <div className="rbc-toolbar">
-      <span className="rbc-btn-group">
-        <ViewNamesGroup
-          view={view}
-          views={views}
-          messages={messages}
-          onView={onView}
-        />
-      </span>
-
-      <span className="rbc-toolbar-label">{label}</span>
-
-      <span className={clsx("rbc-btn-group", "examples--custom-toolbar")}>
-        <button
-          type="button"
-          onClick={() => onNavigate(navigate.PREVIOUS)}
-          aria-label={messages.previous}
-        >
-          &#60;
-        </button>
-        <button
-          type="button"
-          onClick={() => onNavigate(navigate.TODAY)}
-          aria-label={messages.today}
-        >
-          &#8226;
-        </button>
-        <button
-          type="button"
-          onClick={() => onNavigate(navigate.NEXT)}
-          aria-label={messages.next}
-        >
-          &#62;
-        </button>
-      </span>
-    </div>
-  );
-}
-CustomToolbar.propTypes = {
-  date: PropTypes.instanceOf(Date),
-  label: PropTypes.string,
-  localizer: PropTypes.object,
-  messages: PropTypes.object,
-  onNavigate: PropTypes.func,
-  onView: PropTypes.func,
-  view: PropTypes.string,
-  views: PropTypes.array,
+    render() {
+      return (
+        <span className="posr" style={{ float: "left" }}>
+          <span
+            className="rbc-btn-group"
+            style={{
+              float: "left",
+              // position: "fixed",
+            }}
+          >
+            <button
+              type="button"
+              className="nextp-btn"
+              onClick={() => this.handleNamvigate(this, "PREV")}
+            >
+              {"<"}
+            </button>
+            <button
+              type="button"
+              className="nextp-btn"
+              onClick={() => this.handleNamvigate(this, "NEXT")}
+            >
+              {">"}
+            </button>
+            <button
+              type="button"
+              className="defaultbtn"
+              onClick={() => this.handleNamvigate(this, "TODAY")}
+            >
+              Today
+            </button>
+            <span
+              class="bar-right"
+              style={{
+                float: "right",
+                width: "57px",
+                backgroundcolor: "blue",
+              }}
+            >
+              {this.props.label}
+            </span>
+            <span
+              style={{
+                // float: "left",
+                position: "fixed",
+                left: "80%",
+                // right: "70%",
+              }}
+            >
+              <button
+                type="button"
+                className="defaultbtn"
+                onClick={(e) => this.handleDayChange("month", this.view)}
+              >
+                month
+              </button>
+              <button
+                type="button"
+                className="defaultbtn"
+                onClick={(e) => this.handleDayChange("week", this.view)}
+              >
+                week
+              </button>
+              <button
+                type="button"
+                className="defaultbtn"
+                onClick={(e) => this.handleDayChange("day", this.view)}
+              >
+                day
+              </button>
+              <button
+                type="button"
+                className="defaultbtn"
+                onClick={(e) => this.handleDayChange("agenda", this.view)}
+              >
+                list
+              </button>
+            </span>
+          </span>
+        </span>
+      );
+    }
+  };
 };

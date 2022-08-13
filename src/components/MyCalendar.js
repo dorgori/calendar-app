@@ -7,6 +7,7 @@ import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import moment from "moment";
 import moment_timezone from "moment-timezone";
 import ClipLoader from "react-spinners/ClipLoader";
+import { CustomToolbar } from "./CustomToolbar";
 
 import { convertDurationToDate } from "../utils/dates";
 
@@ -71,6 +72,10 @@ const MyCalendar = (props) => {
     }
   };
 
+  const handleChange = () => {
+    console.log("this block code executed");
+  };
+
   const getEvents = async () => {
     try {
       setIsLoading(true);
@@ -123,6 +128,7 @@ const MyCalendar = (props) => {
         // components={{ toolbar: "a" }}
         // views={["month", "week", "day", "agenda"]}
         // views={[{ agenda: "list" }]}
+        components={{ toolbar: CustomToolbar({ events, handleChange }) }}
         formats={{
           // Side pannel
           timeGutterFormat: (date, culture, localizer) =>
