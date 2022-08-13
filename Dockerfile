@@ -15,7 +15,8 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+CMD ["node" , "./src/index.js"]
 
 # RUN chown -R node /usr/src/app
 
