@@ -14,5 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Build the docker image
+      - name: Build calendar client docker image
         run: docker build ./calendar-client
+      - name: Build calendar server docker image
+        run: docker build ./calendar-server
