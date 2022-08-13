@@ -1,12 +1,12 @@
 version: "3.8"
 services:
-  event-system-fe:
+  calendar-client:
     build: ./calendar-client
     container_name: calendar_fe
     ports:
       - "3000:3000"
     volumes:
-      - ./app
-      - ./app/node_modules
+      - ./calendar-client/app
+      - ./calendar-client/app/node_modules
     stdin_open: true
     tty: true
