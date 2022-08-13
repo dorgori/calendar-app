@@ -2,7 +2,7 @@ version: "3.8"
 services:
   event-system-fe:
     build: ./calendar-client
-    container_name: calendar_fe_c
+    container_name: calendar_fe
     ports:
       - "3000:3000"
     volumes:
