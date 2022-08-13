@@ -9,6 +9,8 @@ COPY package.json .
 # RUN npm install --production --silent && mv node_modules ../
 RUN npm install
 
+RUN cd /app
+
 COPY . .
 
 EXPOSE 3000
