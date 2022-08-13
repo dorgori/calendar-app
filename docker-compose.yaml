@@ -1,6 +1,6 @@
-version: "0.1.0"
+version: "3.8"
 services:
-  eventSystemFe:
+  event-system-fe:
     build: ./
     container_name: calendar_fe_c
     ports:
