@@ -18,8 +18,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    steps:
-      
+    steps: 
       - uses: actions/checkout@main
       - name: Build the docker image
       - working-directory: calendar-fe
