@@ -24,3 +24,4 @@ calendar-client/node_modules/
 calendar-client/build/
 calendar-server/node_modules/
 calendar-server/build/
+events/

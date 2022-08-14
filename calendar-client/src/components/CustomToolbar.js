@@ -1,6 +1,5 @@
 import Toolbar from "react-big-calendar/lib/Toolbar";
-import styled, { css } from "styled-components";
-// design custom design or elements for top navigation toolbaar, for today, next, prev or all views
+import styled from "styled-components";
 
 const Button = styled.button`
   background: rgb(47, 79, 79);
@@ -11,14 +10,13 @@ const Button = styled.button`
   border: none;
 `;
 
+// design custom design or elements for top navigation toolbaar, for today, next, prev or all views
+
 export const CustomToolbar = () => {
   return class BaseToolBar extends Toolbar {
     constructor(props) {
       super(props);
     }
-    // handleDayChange = (event, mconte) => {
-    //   mconte(event.target.value);
-    // };
     handleDayChange = (value, mconte) => {
       mconte(value);
     };

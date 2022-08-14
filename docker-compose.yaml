@@ -5,22 +5,14 @@ services:
     container_name: calendar_fe
     ports:
       - "3000:3000"
-  #   volumes:
-  #     - ./calendar-client/app
-  #     - ./calendar-client/app/node_modules
     stdin_open: true
-  #   tty: true
+    depends_on:
+      - calendar-server
   calendar-server:
     build: ./calendar-server
     container_name: calendar_be
     ports:
       - "4000:4000"
-    # volumes:
-    #   - .:calendar-server/app/
-    #   - /calendar-server/app/node_modules
-    # - ./calendar-server/app
-    # - ./calendar-server/app/node_modules
-    # tty: true
     links:
       - mongo
   mongo:

@@ -55,6 +55,7 @@ const MyCalendar = (props) => {
 
   // // Use for Moving & Resizing events - Drag/Drop/Resize
   const handleSelectSlot = ({ start, end }) => {
+    console.log("In handleSelectSlot");
     const title = window.prompt("Inset event title");
     if (title) {
       axios
