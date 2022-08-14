@@ -13,10 +13,19 @@
 # CMD ["node", "app.js"]
 
 FROM node:current-alpine
-RUN mkdir -p /usr/src/app
-COPY . /usr/src/app
-WORKDIR /usr/src/app
+
+RUN mkdir -p /app
+
+COPY package.json /app
+
 RUN npm install
+
+COPY . /app
+
+EXPOSE 4000
+
+WORKDIR /app
+
 ENTRYPOINT [ "node","app.js" ]
 
 
