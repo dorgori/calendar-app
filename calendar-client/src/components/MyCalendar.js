@@ -29,6 +29,7 @@ const MyCalendar = (props) => {
         response.data.data.start,
         response.data.data.duration
       ),
+      duration: response.data.data.duration,
       title: response.data.data.title,
       _id: response.data.data._id,
     };
@@ -95,6 +96,9 @@ const MyCalendar = (props) => {
     }
   };
 
+  const customTimeGutterHeader = function () {
+    return <div style={{ width: "60px" }}>all-day</div>;
+  };
   useEffect(() => {
     getEvents();
   }, []);
@@ -112,79 +116,73 @@ const MyCalendar = (props) => {
     </div>
   ) : (
     <div>
-      <DragAndDropCalendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 600 }}
-        defaultView={"week"}
-        scrollToTime={moment().set({ h: 9, m: 0 }).toDate()}
-        onEventDrop={handleDndResize}
-        onEventResize={handleDndResize}
-        //Hold press and drag to manipulate time
-        onSelectSlot={handleSelectSlot}
-        selectable
-        // components={{ toolbar: "a" }}
-        // views={["month", "week", "day", "agenda"]}
-        // views={[{ agenda: "list" }]}
-        components={{ toolbar: CustomToolbar({ events, handleChange }) }}
-        formats={{
-          // Side pannel
-          timeGutterFormat: (date, culture, localizer) =>
-            localizer.format(date, "ha", culture),
-          //Inner event
-          eventTimeRangeFormat: ({ start, end }, culture, localizer) => {
-            let s = localizer.format(start, "HH:mm", culture);
-            let e = localizer.format(end, "HH:mm", culture);
-            return `${s} - ${e}`;
-          },
-          agendaTimeRangeFormat: ({ start, end }, culture, localizer) => {
-            let s = localizer.format(start, "HH:mm", culture);
-            let e = localizer.format(end, "HH:mm", culture);
-            return `${s} - ${e}`;
-          },
-          // Calendar header
-          dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
-            let s = localizer.format(start, "MMM DD ", culture);
-            let e = localizer.format(end, "MMM DD, YYYY", culture);
-            return `${s} - ${e}`;
-          },
-          // Weekly days header representation
-          dayFormat: (date, culture, localizer) => {
-            let s = localizer.format(date, "ddd M/D", culture);
-            return `${s} `;
-          },
-          //Month inner view
-          // dateFormat: ({ start, end }, culture, localizer) => {
-          //   let s = localizer.format(start, "MMM DD ", culture);
-          //   let e = localizer.format(end, "MMM DD, YYYY", culture);
-          //   return `${s} - ${e}`;
-          // },
-          // agendaDateFormat: ({ start, end }, culture, localizer) => {
-          //   let s = localizer.format(start, "MMM DD ", culture);
-          //   let e = localizer.format(end, "MMM DD, YYYY", culture);
-          //   // return `${s} - ${e}`;
-          //   // return ``;
-          // },
-          // Day header // TODO: how day header should be looked
-          dayHeaderFormat: (date, culture, localizer) => {
-            let s = localizer.format(date, "MMM d", culture);
-            return `${s}`;
-          },
-          // Responsible for we month calendar heading TODO-fix
-          weekdayFormat: ({ start, end }, culture, localizer) => {
-            let s = localizer.format(start, " ", culture);
-            return `${s}`;
-            // return `Mon`;
-          },
-          // Month header // TODO: how month header should be looked
-          // monthHeaderFormat: ({ start, end }, culture, localizer) => {
-          //   let s = localizer.format(start, " ", culture);
-          //   return `${s}`;
-          // },
+      <div style={{ borderTop: "5px solid rgb(255,215,0)" }}></div>
+
+      <div
+        style={{
+          marginBottom: "15px",
+          marginTop: "15px",
+          marginLeft: "10px",
+          marginRight: "10px",
         }}
-      />
+      >
+        <DragAndDropCalendar
+          localizer={localizer}
+          popup
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          style={{ height: 600 }}
+          defaultView={"week"}
+          scrollToTime={moment().set({ h: 9, m: 0 }).toDate()}
+          onEventDrop={handleDndResize}
+          onEventResize={handleDndResize}
+          //Hold press and drag to manipulate time
+          onSelectSlot={handleSelectSlot}
+          selectable
+          components={{
+            toolbar: CustomToolbar({ events, handleChange }),
+            timeGutterHeader: customTimeGutterHeader,
+          }}
+          formats={{
+            // Side pannel
+            timeGutterFormat: (date, culture, localizer) =>
+              localizer.format(date, "ha", culture),
+            //Inner event
+            eventTimeRangeFormat: ({ start, end }, culture, localizer) => {
+              let s = localizer.format(start, "HH:mm", culture);
+              let e = localizer.format(end, "HH:mm", culture);
+              return `${s} - ${e}`;
+            },
+            agendaTimeRangeFormat: ({ start, end }, culture, localizer) => {
+              let s = localizer.format(start, "HH:mm", culture);
+              let e = localizer.format(end, "HH:mm", culture);
+              return `${s} - ${e}`;
+            },
+            // Calendar header
+            dayRangeHeaderFormat: ({ start, end }, culture, localizer) => {
+              let s = localizer.format(start, "MMM DD ", culture);
+              let e = localizer.format(end, "MMM DD, YYYY", culture);
+              return `${s} - ${e}`;
+            },
+            // Weekly days header representation
+            dayFormat: (date, culture, localizer) => {
+              let s = localizer.format(date, "ddd M/D", culture);
+              return `${s} `;
+            },
+            // Day header // TODO: how day header should be looked
+            dayHeaderFormat: (date, culture, localizer) => {
+              let s = localizer.format(date, "MMM d", culture);
+              return `${s}`;
+            },
+            // Responsible for we month calendar heading TODO-fix
+            weekdayFormat: ({ start, end }, culture, localizer) => {
+              let s = localizer.format(start, " ", culture);
+              return `${s}`;
+            },
+          }}
+        />
+      </div>
     </div>
   );
 };
