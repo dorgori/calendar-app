@@ -7,6 +7,7 @@ const connectToDb = async () => {
       .connect(dbConfig.mongoUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        directConnection: true,
       })
       .then(() => {
         console.log("Connected to MongoDB");

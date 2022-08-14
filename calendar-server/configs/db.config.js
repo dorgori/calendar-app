@@ -1,3 +1,3 @@
 module.exports = {
-  mongoUrl: "mongodb://localhost/calendar-db",
+  mongoUrl: "mongodb://mongo:27017/calendar-db",
 };
