@@ -1,14 +1,14 @@
 version: "3.8"
 services:
-  # calendar-client:
-  #   build: ./calendar-client
-  #   container_name: calendar_fe
-  #   ports:
-  #     - "3000:3000"
+  calendar-client:
+    build: ./calendar-client
+    container_name: calendar_fe
+    ports:
+      - "3000:3000"
   #   volumes:
   #     - ./calendar-client/app
   #     - ./calendar-client/app/node_modules
-  #   stdin_open: true
+    stdin_open: true
   #   tty: true
   calendar-server:
     build: ./calendar-server
@@ -20,7 +20,6 @@ services:
     #   - /calendar-server/app/node_modules
     # - ./calendar-server/app
     # - ./calendar-server/app/node_modules
-    # stdin_open: true
     # tty: true
     links:
       - mongo
